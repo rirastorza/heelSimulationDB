@@ -24,7 +24,7 @@ from shapely.geometry import Polygon
 
 
 #Dicom con data
-archivo = '/home/ramiro/Documentos/CIC-2024/Imagenes por microondas/muñecas/ACOSTA_GUSTAVO/Study20110808_205745/No_Series_Name/CT80280000021.dcm'
+archivo = '/home/ramiro/Documentos/CIC-2024/Microwave imaging/Database/ACOSTA_GUSTAVO/Study20110808_205745/No_Series_Name/CT80280000021.dcm'
 
 #y = image_gray[430,350:600]
 #x = np.arange(len(y), dtype=float)
@@ -84,8 +84,6 @@ print(a[0])
 contorno_hueso1 = contours[a[0]]
 contorno_hueso2 = contours[a[1]]
 
-polygon = Polygon(contorno_hueso1)
-print(polygon.centroid)
 
 #Contornos de piel
 contours2 = measure.find_contours(imagen_norm,0.2)
@@ -151,6 +149,13 @@ centrar[:,1] = xcen
 centrar[:,0] = ycen
 
 contour = contorno_hueso1*DeltaX*1.0e-3-centrar
+
+
+polygon = Polygon(contour)
+xcenh1 = polygon.centroid.x*DeltaX*1.0e-3
+ycenh1 = polygon.centroid.y*DeltaX*1.0e-3
+print('x: ',xcenh1,'y: ',ycenh1)
+
 
 lineas = []
 a = contour[:,1]
@@ -315,6 +320,18 @@ aa = 'Plane Surface('+str(superficies)+') = {'+str(n+3)+','+str(n+2)+'};\n'
 f.write(aa)
 
 
+#Coloco puntos con mayor resolución en antenas
+Tr = np.arange(16)
+for tr in Tr:
+    xr = (0.15/2)*np.cos(tr*2*np.pi/16.)
+    yr = (0.15/2)*np.sin(tr*2*np.pi/16.)
+    aa = 'Point('+str(1000+tr)+') = {'+str(xr)+','+str(yr)+',0,0.01/2};'
+    f.write(aa)
+    aa = 'Point{'+str(1000+tr)+'} In Surface{'+str(superficies)+'};'
+    f.write(aa)
+
+
+
 #"Medio de acoplamiento"
 aa = 'Physical Surface(100) = {'+str(superficies)+'};\n'
 f.write(aa)
@@ -331,6 +348,8 @@ f.write(aa)
 
 aa = 'Mesh.CharacteristicLengthMax = 1.0e-2;\n'
 f.write(aa)
+
+
 
 f.close()
 
