@@ -24,7 +24,7 @@ from shapely.geometry import Polygon
 
 
 #Dicom con data
-archivo = '/home/ramiro/Documentos/CIC-2024/Microwave imaging/Database/ACOSTA_GUSTAVO/Study20110808_205745/No_Series_Name/CT80280000021.dcm'
+archivo = '/home/ramiro/Documentos/CIC-2024/Microwave imaging/Database/Study20110808_205745/No_Series_Name/CT80280000021.dcm'
 
 #y = image_gray[430,350:600]
 #x = np.arange(len(y), dtype=float)
