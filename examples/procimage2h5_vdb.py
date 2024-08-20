@@ -11,7 +11,7 @@ import h5py
 
 import pydicom
 #Dicom con data
-archivo = '/home/ramiro/Documentos/CIC-2024/Microwave imaging/Database/ACOSTA_GUSTAVO/Study20110808_205745/No_Series_Name/CT80280000018.dcm'
+archivo = '/home/ramiro/Documentos/CIC-2024/Microwave imaging/Database/Study20110808_205745/No_Series_Name/CT80280000018.dcm'
 
 slice1 = pydicom.dcmread(archivo)
 
