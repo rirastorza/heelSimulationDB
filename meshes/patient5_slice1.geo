@@ -15,3 +15,4 @@ Physical Surface(100) = {3};
 Physical Surface(200) = {2};
 Physical Surface(300) = {1};
 Physical Line(10) = {113,114,115,116};
+Mesh.CharacteristicLengthMax = 1.0e-2;
